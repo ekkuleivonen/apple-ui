@@ -1,7 +1,7 @@
 .toolBar {
   position: fixed;
   top: 0;
-  width: 100%;
+  width: 100vw;
   height: 35px;
   display: flex;
   justify-content: space-between;
