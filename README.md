@@ -1,3 +1,7 @@
+#Apple UI replica in the browser
+
+<img width="1363" alt="Screenshot 2022-07-10 at 23 16 29" src="https://user-images.githubusercontent.com/92802215/178164013-2683748f-e02f-4c7e-aa73-6ebac21a7576.png">
+
 ## Usage
 
 ```bash
