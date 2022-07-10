@@ -1,8 +1,8 @@
 import { Component, createSignal } from "solid-js";
-import styles from "./Tool-bar.module.css";
+import styles from "./ToolBar.module.css";
 
-import RightMenu from "../Tool-bar-menus/Right-menu";
-import LeftMenu from "../Tool-bar-menus/Left-menu";
+import RightMenu from "../ToolBarMenus/RightMenu";
+import LeftMenu from "../ToolBarMenus/LeftMenu";
 
 const ToolBar: Component = () => {
   const [windowWidth, setWindowWidth] = createSignal<number>(window.innerWidth);

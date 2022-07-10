@@ -1,0 +1,9 @@
+.dockItem {
+  height: 100%;
+  padding: 0px 5px;
+  transition: all 0.15s ease-in-out;
+}
+
+.dockIcon {
+  max-height: 100%;
+}

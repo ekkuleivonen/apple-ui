@@ -1,0 +1,28 @@
+.leftMenu {
+  display: flex;
+  align-items: center;
+}
+
+.rightMenu {
+  margin-right: 20px;
+  display: flex;
+  align-items: center;
+}
+
+.menuItem {
+  max-height: 17px;
+  margin-right: 20px;
+  cursor: default;
+  font-size: 13px;
+  line-height: 13px;
+  display: flex;
+  align-items: center;
+}
+
+.wifiIcon {
+  max-height: 13px;
+}
+
+.itemHighlight {
+  font-weight: bold;
+}
