@@ -1,44 +1,85 @@
-import { Component, ComponentProps, createSignal } from "solid-js";
+import {
+  Component,
+  ComponentProps,
+  createEffect,
+  createSignal,
+  For,
+} from "solid-js";
 import styles from "./Dock.module.css";
 
 import DockItem from "./DockItem";
-import {
-  contactsDockItem,
-  notesDockItem,
-  safariDockItem,
-  finderDockItem,
-  itermDockItem,
-  trashDockItem,
-} from "../../data/dock-items";
+import dockItems, { binDockItem } from "../../data/dock-items";
 
 interface DockProps extends ComponentProps<any> {
   // add props here
 }
 
-//toggleDock size on hover
-const toggleDockSize = (e: MouseEvent) => {
-  const dock = e.currentTarget as HTMLElement;
-  const currentWidth = dock.offsetWidth;
-  if (dock.style.width === "" || dock.style.width === "auto")
-    return (dock.style.width = `${currentWidth + 50}px`);
-  return (dock.style.width = "auto");
-};
+const [relativeMousePosition, setRelativeMousePosition] = createSignal(0.5);
 
 const Dock: Component<DockProps> = (props: DockProps) => {
+  const magnify = (e: MouseEvent) => {
+    //calculate the relative position of the mouse
+    const target = e.target as HTMLElement;
+    if (target.id !== "dock") return;
+    const rect = target.getBoundingClientRect();
+    const mouseX = e.clientX - rect.left;
+    const relativeMousePosition = mouseX / rect.width;
+    if (relativeMousePosition > 1 || relativeMousePosition < 0) return;
+    setRelativeMousePosition(relativeMousePosition);
+  };
+
+  createEffect(() => {
+    const dock = document.getElementById("dock") as HTMLElement;
+    const renderedDockItems = [...dock.children] as HTMLElement[];
+    renderedDockItems.forEach((item, idx) => {
+      const dimensions = item.getClientRects();
+      const itemCenter = item.offsetLeft + dimensions[0].width / 2;
+      //calculate the relative position of the item center to the dock
+      const relativeItemPosition =
+        itemCenter / dock.getBoundingClientRect().width;
+    });
+  });
+
+  const resetDock = () => {
+    const dock = document.getElementById("dock") as HTMLElement;
+    dock.style.width = "";
+    const icons = dock.querySelectorAll("img");
+    icons.forEach((icon) => {
+      icon.style.height = "50px";
+      icon.style.marginTop = "0px";
+      icon.style.marginLeft = "0px";
+    });
+  };
+
+  const activateDock = () => {
+    const dock = document.getElementById("dock") as HTMLElement;
+    const oldWidth = dock.getClientRects()[0].width;
+    dock.style.width = `${oldWidth + 30}px`;
+  };
+
   return (
     <div
       class={styles.dock}
       id="dock"
-      onMouseEnter={toggleDockSize}
-      onMouseLeave={toggleDockSize}
+      onMouseMove={magnify}
+      onMouseLeave={resetDock}
+      onMouseEnter={activateDock}
     >
-      <DockItem dockItem={finderDockItem} />
-      <DockItem dockItem={notesDockItem} />
-      <DockItem dockItem={safariDockItem} />
-      <DockItem dockItem={itermDockItem} />
-      <DockItem dockItem={contactsDockItem} />
-      <div class={styles.divider} />
-      <DockItem dockItem={trashDockItem} />
+      <For each={dockItems}>
+        {(dockItem: any) => (
+          <DockItem
+            dockItem={dockItem}
+            relativeMousePosition={relativeMousePosition}
+            id={dockItem.img_url}
+          />
+        )}
+      </For>
+      {/* <div class={styles.divider} /> */}
+      <DockItem
+        dockItem={binDockItem}
+        relativeMousePosition={relativeMousePosition}
+        id={binDockItem.img_url}
+      />
     </div>
   );
 };

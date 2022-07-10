@@ -1,35 +1,23 @@
 import contactsIcon from "../assets/contacts-icon.png";
-export const contactsDockItem = {
-  img_url: contactsIcon,
-  title: "Contacts",
-};
-
 import notesIcon from "../assets/notes-icon.png";
-export const notesDockItem = {
-  img_url: notesIcon,
-  title: "Notes",
-};
-
 import safariIcon from "../assets/safari-icon.png";
-export const safariDockItem = {
-  img_url: safariIcon,
-  title: "Safari",
-};
-
 import finderIcon from "../assets/finder-icon.png";
-export const finderDockItem = {
-  img_url: finderIcon,
-  title: "Finder",
-};
-
 import itermIcon from "../assets/iterm-icon.png";
-export const itermDockItem = {
-  img_url: itermIcon,
-  title: "iTerm",
-};
+import binIcon from "../assets/trash-icon.png";
 
-import trashIcon from "../assets/trash-icon.png";
-export const trashDockItem = {
-  img_url: trashIcon,
+import type { DockItem } from "../components/Dock/DockItem";
+
+const dockItems: DockItem[] = [
+  { img_url: contactsIcon, title: "Contacts" },
+  { img_url: notesIcon, title: "Notes" },
+  { img_url: safariIcon, title: "Safari" },
+  { img_url: finderIcon, title: "Finder" },
+  { img_url: itermIcon, title: "iTerm" },
+];
+
+export default dockItems;
+
+export const binDockItem = {
+  img_url: binIcon,
   title: "Bin",
 };

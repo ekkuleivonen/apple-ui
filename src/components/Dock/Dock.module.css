@@ -3,18 +3,18 @@
   bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
-  height: 70px;
+  height: 60px;
   background-color: rgba(207, 207, 207, 0.2);
   border: solid 1px rgba(66, 66, 66, 0.2);
   box-shadow: inset 0 0 2px rgba(255, 255, 255, 0.2);
   backdrop-filter: blur(10px);
   border-radius: 20px;
-  transition: margin 0.15s ease-in-out;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 5px;
   transition: all 0.15s ease-in-out;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 5px 5px;
+  min-width: 400px;
 }
 
 .divider {
