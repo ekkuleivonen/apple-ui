@@ -1,0 +1,116 @@
+:root {
+  --safari-top: 50px;
+  --safari-left: 50px;
+  --safari-width: 700px;
+  --safari-height: 600px;
+}
+
+.appWindow {
+  height: var(--safari-height);
+  width: var(--safari-width);
+  left: var(--safari-left);
+  top: var(--safari-top);
+  position: absolute;
+
+  z-index: 9999;
+}
+.withinTrackers {
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 5px 0 15px rgba(0, 0, 0, 0.3);
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.mainContent {
+  width: 100%;
+  height: 100%;
+}
+.mainContent img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+}
+
+/* TOP BAR */
+.topBar {
+  height: 30px;
+  width: 100%;
+  background-color: #373737;
+  border-radius: 5px 5px 0px 0px;
+  display: flex;
+  align-items: center;
+  padding-left: 10px;
+  position: relative;
+  z-index: 99999;
+  pointer-events: none;
+}
+.topBar div {
+  height: 12px;
+  width: 12px;
+  border-radius: 50%;
+  margin-right: 4px;
+  pointer-events: all;
+}
+.exit {
+  background-color: #ed6a5e;
+}
+.minimize {
+  background-color: #f4be50;
+}
+.maximize {
+  background-color: #61c554;
+}
+
+/* TRACKER ELEMENTS */
+.trackerElements {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 9999;
+  pointer-events: none;
+}
+.isTracking {
+  pointer-events: all;
+}
+.mover {
+  position: absolute;
+  z-index: 400;
+  width: 100%;
+  height: 25px;
+  pointer-events: all;
+}
+.resizer {
+  position: absolute;
+  z-index: 500;
+  width: 15px;
+  height: 15px;
+  pointer-events: all;
+}
+.left {
+  left: 0;
+  height: 100%;
+  cursor: ew-resize;
+  transform: translateX(-50%);
+}
+.right {
+  right: 0;
+  height: 100%;
+  cursor: ew-resize;
+  transform: translateX(50%);
+}
+.top {
+  top: 0;
+  width: 100%;
+  cursor: ns-resize;
+  transform: translateY(-50%);
+}
+.bottom {
+  bottom: 0;
+  width: 100%;
+  cursor: ns-resize;
+  transform: translateY(50%);
+}

@@ -1,4 +1,4 @@
-import { Component, ComponentProps, createEffect } from "solid-js";
+import { Component, ComponentProps, createEffect, Setter } from "solid-js";
 import styles from "./DockItem.module.css";
 
 export type DockItem = {
@@ -6,14 +6,24 @@ export type DockItem = {
   title: string;
 };
 
+import { ToggleCollection } from "../Desktop/Desktop";
 interface DockItemProps extends ComponentProps<any> {
   dockItem: DockItem;
+  setvisibility?: ToggleCollection;
 }
 
 const DockItem: Component<DockItemProps> = ({
   dockItem,
   relativeMousePosition,
+  setvisibility,
 }) => {
+  const openAppWindow = () => {
+    if (!setvisibility) return;
+    const setter = setvisibility.find(`set${dockItem.title}`);
+    if (!setter) return;
+    return setter(true);
+  };
+
   //define relative position of the item to its parent
 
   const avoidMouseMove = (e: MouseEvent) => {
@@ -103,7 +113,7 @@ const DockItem: Component<DockItemProps> = ({
     <div
       class={styles.dockItem}
       onMouseMove={avoidMouseMove}
-      onclick={() => console.log("hello there")}
+      onclick={openAppWindow}
       id={dockItem.img_url}
     >
       <img

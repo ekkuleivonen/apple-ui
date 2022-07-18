@@ -4,19 +4,21 @@ import {
   createEffect,
   createSignal,
   For,
+  Setter,
 } from "solid-js";
 import styles from "./Dock.module.css";
 
 import DockItem from "./DockItem";
 import dockItems, { binDockItem } from "../../data/dock-items";
 
+import { ToggleCollection } from "../Desktop/Desktop";
 interface DockProps extends ComponentProps<any> {
-  // add props here
+  toggleCollection?: ToggleCollection;
 }
 
 const [relativeMousePosition, setRelativeMousePosition] = createSignal(0.5);
 
-const Dock: Component<DockProps> = (props: DockProps) => {
+const Dock: Component<DockProps> = ({ setVisibility }: DockProps) => {
   const magnify = (e: MouseEvent) => {
     //calculate the relative position of the mouse
     const target = e.target as HTMLElement;
@@ -27,7 +29,6 @@ const Dock: Component<DockProps> = (props: DockProps) => {
     if (relativeMousePosition > 1 || relativeMousePosition < 0) return;
     setRelativeMousePosition(relativeMousePosition);
   };
-
   createEffect(() => {
     const dock = document.getElementById("dock") as HTMLElement;
     const renderedDockItems = [...dock.children] as HTMLElement[];
@@ -39,7 +40,6 @@ const Dock: Component<DockProps> = (props: DockProps) => {
         itemCenter / dock.getBoundingClientRect().width;
     });
   });
-
   const resetDock = () => {
     const dock = document.getElementById("dock") as HTMLElement;
     dock.style.width = "";
@@ -50,7 +50,6 @@ const Dock: Component<DockProps> = (props: DockProps) => {
       icon.style.marginLeft = "0px";
     });
   };
-
   const activateDock = () => {
     const dock = document.getElementById("dock") as HTMLElement;
     const oldWidth = dock.getClientRects()[0].width;
@@ -71,6 +70,7 @@ const Dock: Component<DockProps> = (props: DockProps) => {
             dockItem={dockItem}
             relativeMousePosition={relativeMousePosition}
             id={dockItem.img_url}
+            setVisibility={setVisibility}
           />
         )}
       </For>
